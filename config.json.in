@@ -1,0 +1,7 @@
+{
+    "gitlab": {
+        "host": "",
+        "apikey": "",
+        "project_name": ""
+    }
+}
