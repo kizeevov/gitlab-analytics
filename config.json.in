@@ -3,5 +3,15 @@
         "host": "",
         "apikey": "",
         "project_name": ""
-    }
+    },
+    "reports": [
+        {
+            "name": "review_lifetime",
+            "config": {
+                "datetime_from": "2021-01-01 12:00:00",
+                "datetime_to": "2021-01-01 12:00:00",
+                "assignee": "@User"
+            }
+        }
+    ]
 }
