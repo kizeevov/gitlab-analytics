@@ -13,5 +13,3 @@ Cargo.lock
 .vscode/
 .idea/
 .cargo/
-
-config.json
