@@ -11,5 +11,7 @@ Cargo.lock
 **/*.rs.bk
 
 .vscode/
+.idea/
+.cargo/
 
 config.json

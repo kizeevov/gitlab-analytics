@@ -1,6 +1,5 @@
 use chrono::{TimeZone, Utc};
 use clap::{App, Arg, ArgMatches};
-use config::{Config, File};
 use gitlab::Gitlab;
 use gitlab::{
     api::{self, projects, projects::merge_requests::*, Query},
@@ -8,9 +7,10 @@ use gitlab::{
 };
 use std::collections::HashMap;
 
-mod settings;
+mod configuration;
+mod reports;
 
-use settings::Settings;
+use configuration::Config;
 
 extern crate fstrings;
 
@@ -18,8 +18,8 @@ fn main() {
     let matches = get_args_matches();
     let config_path = matches.value_of("config").unwrap_or("config.json");
 
-    let settings = Settings::new(config_path).unwrap();
-    println!("{:?}", settings.gitlab);
+    let settings = Config::new(config_path).unwrap();
+    println!("{:?}", settings);
 
     // let mut settings = Config::new();
     // settings.merge(File::with_name("config.json")).unwrap();
