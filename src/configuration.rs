@@ -1,23 +1,16 @@
-use crate::reports::report::ReportType;
+use crate::reports::report::ReportParams;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize)]
 pub struct Gitlab {
     pub host: String,
     pub apikey: String,
-    // pub project_name: String,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct Report {
-    pub report_type: ReportType,
-    //pub project_name: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Config {
     pub gitlab: Gitlab,
-    pub reports: Vec<Report>,
+    pub reports: Vec<ReportParams>,
 }
 
 impl Config {

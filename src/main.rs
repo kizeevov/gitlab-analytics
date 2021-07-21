@@ -12,15 +12,14 @@ mod reports;
 
 use configuration::Config;
 
-extern crate fstrings;
-
 fn main() {
+    println!("{:?}", std::env::current_dir());
+
     let matches = get_args_matches();
     let config_path = matches.value_of("config").unwrap_or("config.json");
 
     let settings = Config::new(config_path).unwrap();
     println!("{:?}", settings);
-
     // let mut settings = Config::new();
     // settings.merge(File::with_name("config.json")).unwrap();
 
@@ -32,21 +31,21 @@ fn main() {
     //     settings.try_into::<HashMap<String, String>>().unwrap()
     // );
 
-    // let client = Gitlab::new_insecure(GITLAB_HOST_URL, GITLAB_APIKEY).unwrap();
+    // let client = Gitlab::new_insecure(settings.gitlab.host, settings.gitlab.apikey).unwrap();
     // let endpoint = projects::Project::builder()
-    //     .project(GITLAB_PROJECT_NAME)
+    //     .project("smartptt/smartptt")
     //     .build()
     //     .unwrap();
     // let project: Project = endpoint.query(&client).unwrap();
 
-    // println_f!("{project.name}");
+    // println!("{}", project.name);
 
     // let merge_requests_endpoint = MergeRequests::builder()
     //     .project(project.id.value())
     //     .order_by(MergeRequestOrderBy::CreatedAt)
     //     .state(MergeRequestState::Merged)
     //     .created_after(
-    //         Utc.datetime_from_str("2021-04-01 12:00:09", "%Y-%m-%d %H:%M:%S")
+    //         Utc.datetime_from_str("2021-06-01 12:00:09", "%Y-%m-%d %H:%M:%S")
     //             .unwrap(),
     //     )
     //     .build()
