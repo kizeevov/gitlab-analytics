@@ -1,18 +1,15 @@
-use chrono::{DateTime, Utc};
+use gitlab::Gitlab;
 use serde::de::Deserializer;
 use serde::Deserialize;
 use serde_json::Value;
+
+use super::review_lifetime_report::ReviewLifetimeReportParams;
 
 #[derive(Deserialize, Debug, PartialEq)]
 #[serde(tag = "type", rename_all = "kebab-case")]
 #[serde(remote = "ReportParams")]
 pub enum ReportParams {
-    ReviewLifetime {
-        project_name: String,
-        datetime_from: DateTime<Utc>,
-        datetime_to: DateTime<Utc>,
-        assignee: String,
-    },
+    ReviewLifetime(ReviewLifetimeReportParams),
     #[serde(skip_deserializing)]
     Unknown,
 }
@@ -29,4 +26,15 @@ impl<'de> Deserialize<'de> for ReportParams {
         });
         Ok(deserialized)
     }
+}
+
+pub fn make(maker: ReportParams, client: &Gitlab) {
+    match maker {
+        ReportParams::ReviewLifetime(params) => params.make_report(client),
+        _ => println!("Unknown report params"),
+    }
+}
+
+pub trait ReportMaker {
+    fn make_report(&self, client: &Gitlab);
 }
